@@ -1,0 +1,46 @@
+name: Deploy to Development
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+env:
+  TF_VAR_project_name: myapp
+  TF_VAR_location: "East US"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: development
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Terragrunt and Terraform
+      uses: hashicorp/setup-terragrunt@v1
+      with:
+        terragrunt_version: "0.55.1"
+        terraform_version: "1.6.0"
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Infrastructure
+      run: |
+        cd infrastructure/environments/dev
+        terragrunt apply -auto-approve
+
+    - name: Update Container App
+      run: |
+        cd infrastructure/environments/dev
+        ACR_SERVER=$(terragrunt output -raw container_registry_login_server)
+        RESOURCE_GROUP=$(terragrunt output -raw resource_group_name)
+
+        az containerapp update \
+          --name ca-${{ env.TF_VAR_project_name }}-dev \
+          --resource-group $RESOURCE_GROUP \
+          --image $ACR_SERVER/${{ env.TF_VAR_project_name }}:${{ github.sha }}

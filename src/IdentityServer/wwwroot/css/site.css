@@ -1,0 +1,70 @@
+.bg-lulapay {
+  background-color: #0F253B;
+}
+
+.btn-primary {
+  background-color: #0F253B !important;
+  border-color: #0F253B !important;
+}
+
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+  background-color: #61B8D8 !important;
+  border-color: #61B8D8 !important;
+}
+
+.text-primary {
+  color: #0F253B !important;
+}
+
+.form-control {
+  background-color: #e9ecef !important;
+  border: none !important;
+  border-radius: 15px !important;
+  color: #495057 !important;
+  font-size: 0.8em !important;
+}
+
+.form-control::placeholder {
+  color: #6c757d !important;
+  opacity: 1 !important;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d !important;
+}
+
+.body-container {
+  margin-top: 60px;
+  padding-bottom: 40px;
+}
+
+.welcome-page li {
+  list-style: none;
+  padding: 4px;
+}
+
+.logged-out-page iframe {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.grants-page .card {
+  margin-top: 20px;
+  border-bottom: 1px solid lightgray;
+}
+.grants-page .card .card-title {
+  font-size: 120%;
+  font-weight: bold;
+}
+.grants-page .card .card-title img {
+  width: 100px;
+  height: 100px;
+}
+.grants-page .card label {
+  font-weight: bold;
+}
+
+/*# sourceMappingURL=site.css.map */

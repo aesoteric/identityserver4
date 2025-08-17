@@ -1,0 +1,64 @@
+@model IdentityServer.Quickstart.Account.ForgotViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+
+    <title>Lulapay - Forgot Password</title>
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico"/>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+
+<div class="container-fluid m-0 p-0">
+    <div class="row no-gutters">
+        <partial name="_Hero"/>
+        <div class="col-md-8 bg-light">
+            <div class="m-3">
+                <partial name="_ValidationSummary"/>
+            </div>
+            <div class="card border-0 mx-auto my-5 w-75">
+                <div class="card-body">
+                    <h1 class="text-primary mb-5 text-center"><strong>Forgot</strong> your password?</h1>
+                    <form asp-route="Forgot">
+                        <input type="hidden" asp-for="ReturnUrl"/>
+
+                        <div class="form-group">
+                            <small class="text-dark">
+                                Reset your password by submitting your email address linked to your Lulapay
+                                account. We will send you an email with a link to choose a new password.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input class="form-control" placeholder="Email" asp-for="Email" autofocus>
+                            <small><span class="text-danger" asp-validation-for="Email"></span></small>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" name="button" value="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+            <partial name="_Footer"/>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>

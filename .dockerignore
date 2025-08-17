@@ -1,0 +1,53 @@
+# Ignore build results
+bin/
+obj/
+out/
+TestResults/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.swp
+
+# Ignore configuration files for development
+*.vspscc
+*.vssscc
+.vscode/
+.vs/
+launchSettings.json
+
+# Ignore logs and crash dumps
+*.log
+*.dmp
+
+# Ignore OS-generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# Ignore Git-related files
+.git/
+.gitignore
+.gitattributes
+
+# Ignore Docker-specific files that shouldn't be in the context
+Dockerfile.*
+docker-compose.*
+
+# Ignore NuGet packages and caches
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+*.cache/
+*.nuspec
+
+# Optional: Ignore local secrets
+secrets/
+*.secret.*
+appsettings.Development.json
+appsettings.Local.json

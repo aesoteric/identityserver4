@@ -1,0 +1,47 @@
+services:
+  identityserver:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - default
+      - private_network
+    depends_on:
+      sqlserver:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:8080;https://+:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=changeit
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/app/certs/cert.pfx
+      - IdentityServer:Clients__0__ClientSecrets__0__Value=${CLIENT_CREDENTIALS_SECRET}
+      - ConnectionStrings__DefaultConnection=Server=sqlserver,1433;Database=LulaLendDevDb;User Id=sa;Password=Abcd1234!;TrustServerCertificate=True;
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./certs:/app/certs
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    restart: on-failure
+    networks:
+      - private_network
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Abcd1234!
+      - MSSQL_PID=Developer
+      - MSSQL_BACKUP_DIR=/var/opt/mssql/backups
+      - MSSQL_LCID=1033
+      - TZ=Etc/UTC
+    healthcheck:
+      test: /opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P Abcd1234! -Q "SELECT 1" || exit 1
+      interval: 10s
+      timeout: 3s
+      retries: 10
+      start_period: 10s
+
+networks:
+  private_network:
+    internal: true
+    driver: bridge

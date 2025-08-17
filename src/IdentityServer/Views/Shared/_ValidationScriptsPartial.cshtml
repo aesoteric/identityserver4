@@ -1,0 +1,46 @@
+@* Views/Shared/_ValidationScriptsPartial.cshtml *@
+
+<script src="~/lib/jquery-validation/jquery.validate.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+@* Alternative CDN approach *@
+@*
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+*@
+
+@* For Bootstrap styling (optional) *@
+<script>
+    // Configure jQuery Validation to use Bootstrap classes
+    $.validator.setDefaults({
+        highlight: function(element) {
+            $(element).closest('.form-group').addClass('has-error');
+            $(element).addClass('is-invalid');
+        },
+        unhighlight: function(element) {
+            $(element).closest('.form-group').removeClass('has-error');
+            $(element).removeClass('is-invalid');
+            $(element).addClass('is-valid');
+        },
+        errorElement: 'span',
+        errorClass: 'text-danger',
+        errorPlacement: function(error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent());
+            } else {
+                error.insertAfter(element);
+            }
+        }
+    });
+
+    // Custom validation methods (optional)
+    $.validator.addMethod("strongpassword", function(value, element) {
+        return this.optional(element) || 
+               /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@@$!%*?&])[A-Za-z\d@@$!%*?&]{8,}$/.test(value);
+    }, "Password must contain at least 8 characters with uppercase, lowercase, number and special character.");
+
+    // Real-time validation for better UX
+    $('form').find('input[data-val=true]').on('blur keyup', function() {
+        $(this).valid();
+    });
+</script>

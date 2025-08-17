@@ -1,0 +1,74 @@
+@model IdentityServer.Quickstart.Account.ResetViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no"/>
+
+    <title>Lulapay - Reset Password</title>
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.ico"/>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico"/>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css"/>
+</head>
+<body>
+
+<div class="container-fluid m-0 p-0">
+    <div class="row no-gutters">
+        <partial name="_Hero"/>
+        <div class="col-md-8 bg-light">
+            <div class="m-3">
+                <partial name="_ValidationSummary"/>
+            </div>
+            <div class="card border-0 mx-auto my-5 w-75">
+                <div class="card-body">
+                    <h1 class="text-primary mb-5 text-center"><strong>Reset</strong> your password?</h1>
+                    <form asp-route="Reset">
+                        <input type="hidden" asp-for="ReturnUrl"/>
+
+                        <div class="form-group">
+                            <small class="text-dark">
+                                Create a new password for your Lulapay account.
+                            </small>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Email"></label>
+                            <input class="form-control" placeholder="Email" asp-for="Email" autofocus>
+                            <small><span class="text-danger" asp-validation-for="Email"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="Password"></label>
+                            <input type="password" class="form-control" placeholder="Password" asp-for="Password"
+                                   autocomplete="off"/>
+                            <small><span class="text-danger" asp-validation-for="Password"></span></small>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" asp-for="ConfirmPassword"></label>
+                            <input class="form-control" placeholder="Confirm Password" asp-for="ConfirmPassword"/>
+                            <small><span class="text-danger" asp-validation-for="ConfirmPassword"></span></small>
+                        </div>
+
+                        <button class="btn btn-primary btn-block" name="button" value="reset">Reset Password</button>
+                    </form>
+                </div>
+            </div>
+            <partial name="_Footer"/>
+        </div>
+    </div>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.slim.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+</body>
+</html>
