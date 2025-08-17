@@ -13,7 +13,7 @@ remote_state {
   }
   config = {
     resource_group_name  = "rg-terraform-state"
-    storage_account_name = "sttfstate${get_env("TF_VAR_project_name", "myapp")}"
+    storage_account_name = "sttfstate${get_env("TF_VAR_project_name", "identityserver4")}"
     container_name       = "tfstate"
     key                  = "${path_relative_to_include()}/terraform.tfstate"
   }
@@ -42,6 +42,6 @@ EOF
 
 # Set common inputs for all environments
 inputs = {
-  project_name = get_env("TF_VAR_project_name", "myapp")
-  location     = get_env("TF_VAR_location", "East US")
+  project_name = get_env("TF_VAR_project_name", "identityserver4")
+  location     = get_env("TF_VAR_location", "South Africa North")
 }

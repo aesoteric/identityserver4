@@ -486,3 +486,17 @@ certs/
 
 # Environment variables
 .env
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.tfvars.json
+.terraform/
+.terraform.lock.hcl
+crash.log
+
+# Terragrunt
+.terragrunt-cache/
+.terragrunt/

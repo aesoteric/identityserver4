@@ -1,6 +1,6 @@
-# Include the root terragrunt.hcl configuration
+# Include the root configuration
 include "root" {
-  path = find_in_parent_folders()
+  path = find_in_parent_folders("root.hcl")
 }
 
 # Include the module configuration
@@ -13,8 +13,8 @@ inputs = {
   environment = "dev"
 
   # Container App settings
-  container_app_name = "ca-myapp-dev"
-  container_image    = "myapp:dev"
+  container_app_name = "ca-identityserver4-dev"
+  container_image    = "identityserver4-dev:latest"
   cpu_requests       = "0.25"
   memory_requests    = "0.5Gi"
   min_replicas       = 1
@@ -33,7 +33,7 @@ inputs = {
 
   tags = {
     Environment = "dev"
-    Project     = "myapp"
+    Project     = "identityserver4"
     ManagedBy   = "terragrunt"
   }
 }
