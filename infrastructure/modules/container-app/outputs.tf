@@ -28,3 +28,8 @@ output "container_app_environment_id" {
   description = "ID of the container app environment"
   value       = azurerm_container_app_environment.main.id
 }
+
+output "container_app_name" {
+  description = "Name of the container app"
+  value       = azurerm_container_app.main.name
+}

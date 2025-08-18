@@ -46,6 +46,8 @@ jobs:
     - name: Get Terragrunt outputs
       id: tg_output
       run: |
+        echo "resource_group=$(terragrunt output -raw resource_group_name)" >> $GITHUB_OUTPUT
+        echo "ca_app_name=$(terragrunt output -raw container_app_name)" >> $GITHUB_OUTPUT
         echo "acr_login_server=$(terragrunt output -raw container_registry_login_server)" >> $GITHUB_OUTPUT
         echo "acr_username=$(terragrunt output -raw container_registry_admin_username)" >> $GITHUB_OUTPUT
         echo "acr_password=$(terragrunt output -raw container_registry_admin_password)" >> $GITHUB_OUTPUT
@@ -68,3 +70,11 @@ jobs:
           ${{ steps.tg_output.outputs.acr_login_server }}/${{ env.TF_VAR_project_name }}-dev:${{ github.sha }}
         build-args: |
           VERSION=3.1-alpine
+
+    - name: Update container app
+      run: |
+        az containerapp update \
+          --name ${{ steps.tg_output.outputs.ca_app_name }} \
+          --resource-group ${{ steps.tg_output.outputs.resource_group }} \
+          --image ${{ steps.tg_output.outputs.acr_login_server }}/${{ env.TF_VAR_project_name }}-dev:${{ github.sha }}
+      working-directory: ${{ env.WORKING_DIR }}
