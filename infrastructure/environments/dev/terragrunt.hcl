@@ -28,7 +28,7 @@ inputs = {
 
   # Ingress settings
   ingress_enabled  = true
-  target_port      = 3000
+  target_port      = 8443
   external_ingress = true
 
   tags = {
